@@ -9,7 +9,7 @@ use listenfd::ListenFd;
 use std::env;
 
 mod db;
-mod error_messages;
+mod logs;
 mod error_handler;
 mod schema;
 
@@ -19,7 +19,7 @@ async fn main() -> std::io::Result<()> {
     db::init();
 
     let mut listenfd = ListenFd::from_env();
-    let mut server = HttpServer::new(|| App::new().configure(error_messages::init_routes));
+    let mut server = HttpServer::new(|| App::new().configure(logs::init_routes));
 
     server = match listenfd.take_tcp_listener(0)? {
         Some(listener) => server.listen(listener)?,
