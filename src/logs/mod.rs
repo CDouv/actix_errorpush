@@ -1,4 +1,4 @@
-//src/error_messages/mod.rs
+//src/logs/mod.rs
 
 mod model;
 mod routes;
