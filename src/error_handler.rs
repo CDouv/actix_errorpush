@@ -28,15 +28,15 @@ impl fmt::Display for CustomError {
 
 impl From<DieselError> for CustomError {
     fn from(error: DieselError) -> CustomError {
-        match error {
-            DieselError::DatabaseError(_, err) => CustomError::new(409, err.message().to_string()),
-            DieselError::NotFound => {
-                CustomError::new(404, "The employee record not found".to_string())
-            }
-            err => CustomError::new(500, format!("Unknown Diesel error: {}", err)),
+        // match error {
+        //     DieselError::DatabaseError(_, err) => CustomError::new(409, err.message().to_string()),
+        //     // DieselError::NotFound => {
+        //     //     CustomError::new(404, "Internal server error".to_string())
+        //     // }
+            CustomError::new(500, format!("Internal server error: {}", err))
         }
     }
-}
+
 
 impl ResponseError for CustomError {
     fn error_response(&self) -> HttpResponse {

@@ -21,17 +21,17 @@ pub struct ValErrorMessages {
 }
 
 impl ValErrorMessages {
-    pub fn find_all()-> Result<Vec<Self>, CustomError> {
-        let conn = db::connection()?;
-        let val_error_messages = val_error_messages::table.load::<ValErrorMessages>(&conn)?;
-        Ok(val_error_messages)
-    }
+    // pub fn find_all()-> Result<Vec<Self>, CustomError> {
+    //     let conn = db::connection()?;
+    //     let val_error_messages = val_error_messages::table.load::<ValErrorMessages>(&conn)?;
+    //     Ok(val_error_messages)
+    // }
 
-    pub fn find(id: i32) -> Result<Self, CustomError> {
-        let conn = db::connection()?;
-        let val_error_message = val_error_messages::table.filter(val_error_messages::id.eq(id)).first(&conn)?;
-        Ok(val_error_message)
-    }
+    // pub fn find(id: i32) -> Result<Self, CustomError> {
+    //     let conn = db::connection()?;
+    //     let val_error_message = val_error_messages::table.filter(val_error_messages::id.eq(id)).first(&conn)?;
+    //     Ok(val_error_message)
+    // }
 
     pub fn create(val_error_message: ValErrorMessage) -> Result<Self, CustomError> {
         let conn = db::connection()?;
@@ -41,30 +41,31 @@ impl ValErrorMessages {
             .get_result(&conn)?;
         Ok(val_error_message)
     }
-    pub fn update(id: i32, val_error_message: ValErrorMessage) -> Result<Self, CustomError> {
-        let conn = db::connection()?;
-        let val_error_message = diesel::update(val_error_messages::table)
-            .filter(val_error_messages::id.eq(id))
-            .set(val_error_message)
-            .get_result(&conn)?;
-        Ok(val_error_message)
 
-    }
+    // pub fn update(id: i32, val_error_message: ValErrorMessage) -> Result<Self, CustomError> {
+    //     let conn = db::connection()?;
+    //     let val_error_message = diesel::update(val_error_messages::table)
+    //         .filter(val_error_messages::id.eq(id))
+    //         .set(val_error_message)
+    //         .get_result(&conn)?;
+    //     Ok(val_error_message)
 
-    pub fn delete(id: i32) -> Result<usize, CustomError> {
-        let conn = db::connection()?;
-        let res = diesel::delete(val_error_messages::table.filter(val_error_messages::id.eq(id))).execute(&conn)?;
-        Ok(res)
-    }
+    // }
+
+    // pub fn delete(id: i32) -> Result<usize, CustomError> {
+    //     let conn = db::connection()?;
+    //     let res = diesel::delete(val_error_messages::table.filter(val_error_messages::id.eq(id))).execute(&conn)?;
+    //     Ok(res)
+    // }
 
 }
 
-impl ValErrorMessage {
-    fn from(val_error_message: ValErrorMessage) -> ValErrorMessage {
-        ValErrorMessage {
-            username: val_error_message.username,
-            body: val_error_message.body,
+// impl ValErrorMessage {
+//     fn from(val_error_message: ValErrorMessage) -> ValErrorMessage {
+//         ValErrorMessage {
+//             username: val_error_message.username,
+//             body: val_error_message.body,
         
-        }
-    }
-}
+//         }
+//     }
+// }
