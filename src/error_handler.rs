@@ -33,7 +33,7 @@ impl From<DieselError> for CustomError {
         //     // DieselError::NotFound => {
         //     //     CustomError::new(404, "Internal server error".to_string())
         //     // }
-            CustomError::new(500, "Internal server error".to_string())
+            CustomError::new(500, "Internal server error!".to_string())
         }
     }
 
