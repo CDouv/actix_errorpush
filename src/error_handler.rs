@@ -33,7 +33,7 @@ impl From<DieselError> for CustomError {
         //     // DieselError::NotFound => {
         //     //     CustomError::new(404, "Internal server error".to_string())
         //     // }
-            CustomError::new(500, "Internal server error!".to_string())
+            CustomError::new(500, format!("Internal server error {:?}", error))
         }
     }
 
@@ -47,7 +47,7 @@ impl ResponseError for CustomError {
 
         let error_message = match status_code.as_u16() < 500 {
             true => self.error_message.clone(),
-            false => "Internal server error".to_string(),
+            false => format!("Internal server error {:?}", self.error_message),
         };
 
         HttpResponse::build(status_code).json(json!({ "message": error_message }))
